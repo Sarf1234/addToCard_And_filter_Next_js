@@ -8,8 +8,16 @@ const ProductPage = ({ product, colors, productmaterial }) => {
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedMaterials, setSelectedMaterials] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState(product.products);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(6);
 
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts?.slice(indexOfFirstProduct, indexOfLastProduct);
   
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };  
 
   // Effect to filter products whenever selections change
   useEffect(() => {
@@ -67,9 +75,9 @@ const ProductPage = ({ product, colors, productmaterial }) => {
 
 
   return (
-    <div className="mx-auto px-8 mt-16">
-      <div className="flex flex-col md:flex-row gap-4">
-        <div className="w-full md:w-1/6">
+    <div className="mx-auto px-8 md:mt-32 mt-12">
+      <div className="flex md:flex-row gap-4">
+        <div className="md:w-1/6 ">
           <div className="font-semibold text-lg mb-6">Filter</div>
           <div className="my-1 capitalize">Materials</div>
           <ul className="list-none list-inside mb-6">
@@ -126,10 +134,17 @@ const ProductPage = ({ product, colors, productmaterial }) => {
                 ))}
               </div>
             </div>
-          )}
-          <div className="flex gap-12 flex-wrap justify-between">
-            {filteredProducts.map((product) => (
+           )}
+          <div className="flex gap-4 md:gap-12 flex-wrap justify-between w-full">
+            {currentProducts?.map((product) => (
               <ProductCard key={product.id} product={product}/>
+            ))}
+          </div>
+          <div className="my-8 text-center">
+            {Array.from({ length: Math.ceil(filteredProducts?.length / productsPerPage) }).map((_, index) => (
+              <button key={index} onClick={() => paginate(index + 1)} className='mx-4 px-2 rounded-full bg-gray-200 text-black'>
+                {index + 1}
+              </button>
             ))}
           </div>
         </div>

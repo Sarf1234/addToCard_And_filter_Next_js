@@ -6,14 +6,13 @@ import { CartContext } from "../context/AddtoCartContext"
 const ProductCard = ({ product }) => {
 
   const { addToCart, cartItems } = useContext(CartContext);
-  console.log(addToCart, cartItems)
 
-  const addproductsToCart = (products) => {
-    addToCart(products)
+  const addproductsToCart = () => {
+    addToCart(product)
   }
   return (
     <div
-      className="w-full md:w-[25%] cursor-pointer"
+      className="cursor-pointer"
       onMouseOver={(e) => e.target.classList.add("hover-effect")}
       onMouseOut={(e) => e.target.classList.remove("hover-effect")}
       onClick={addproductsToCart}
@@ -22,7 +21,7 @@ const ProductCard = ({ product }) => {
         <Image
           src="/images/productimage.jpg"
           alt={product?.name}
-          className="w-full h-auto object-cover bg-gray-100"
+          className="md:w-full w-48 h-60 md:h-auto object-cover bg-gray-100"
           width={300}
           height={400}
         />
@@ -33,9 +32,9 @@ const ProductCard = ({ product }) => {
           <p className="text-white py-2 px-4 rounded-md">Add to Cart</p>
         </div>
       </div>
-      <div className="font-bold text-lg mt-2">{product?.name}</div>
-      <div className="text-gray-600">BLACK COTTON</div>
-      <div className="font-bold text-lg">INR {product?.price}.00</div>
+      <div className="font-medium text-lg mt-2">{product?.name}</div>
+      <div className="text-gray-600 text-sm">BLACK COTTON</div>
+      <div className="font-semibold text-sm mt-4 text-[#5A112B]">INR {product?.price}.00</div>
     </div>
   );
 };

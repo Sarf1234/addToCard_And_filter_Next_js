@@ -5,7 +5,7 @@ const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(
-    JSON.parse(localStorage.getItem("cartItems")) || []
+    typeof window !== 'undefined' && JSON.parse(localStorage.getItem("cartItems")) || []
   );
   const [toggles, setToggles] = useState(false);
 
@@ -14,7 +14,7 @@ const CartProvider = ({ children }) => {
   }, [cartItems]);
 
   const addToCart = (product) => {
-    console.log(product);
+    console.log(product,"hello");
     setCartItems([
       ...cartItems,
       {
