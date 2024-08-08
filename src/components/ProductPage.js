@@ -79,7 +79,7 @@ const ProductPage = ({ product, colors, productmaterial }) => {
       <div className="flex md:flex-row gap-4">
         <div className="md:w-1/6 ">
           <div className="font-semibold text-lg mb-6">Filter</div>
-          <div className="my-1 capitalize">Materials</div>
+          <div className="my-2 capitalize">Materials</div>
           <ul className="list-none list-inside mb-6">
             {productmaterial.material.map((material) => (
               <li
@@ -93,7 +93,7 @@ const ProductPage = ({ product, colors, productmaterial }) => {
               </li>
             ))}
           </ul>
-          <div className="my-1 capitalize">Color</div>
+          <div className="my-2 capitalize">Color</div>
           <ul className="list-none list-inside">
             {colors.colors.map((color) => (
               <li
